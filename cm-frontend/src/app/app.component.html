@@ -1,0 +1,55 @@
+<div class="container">
+  <nav class="navbar bg-primary navbar-expand-sm" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand fs-1 fw-semibold" href="#">
+        <img src="hsco.png" alt="co" height="32pt"/>ncept-mapper
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/text']" routerLinkActive="active" href="text">Text</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/file-upload']" routerLinkActive="active" href="file-upload">File-Upload</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/url']" routerLinkActive="active" href="url">URL</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="p-5 bg-light border">
+    <router-outlet />
+  </div>
+  
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 mt-0 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="https://www.hs-coburg.de/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+        <img src="brand.png" alt="Logo Coburg University" height="50px"/>
+      </a>
+    </div>
+  
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex" >
+      <li class="ms-3 text-body-secondary">©
+        <a class="text-body-secondary" href="https://de.linkedin.com/in/lennart-k%C3%B6pper-6540492a1">Lennart Köpper</a>,
+        <a class="text-body-secondary" href="https://www.coburg-university.de/ueber-uns/fakultaeten/elektrotechnik-und-informatik/personen/prof-dr-roman-rischke.html">Prof. Dr. Roman Rischke</a>
+        2024
+      </li>
+      
+    </ul>
+  </footer>
+</div>
+
+
+
+
+

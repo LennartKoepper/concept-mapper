@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  fastapi-backend:
+    container_name: concept-mapper-cm-backend
+    env_file:
+      - cm-backend/.env
+    build:
+      context: .
+      dockerfile: cm-backend/Dockerfile
+    ports:
+      - "8000:8000"
+    restart: always
+
+  angular-app:
+    container_name: concept-mapper-frontend
+    build:
+      context: .
+      dockerfile: cm-frontend/Dockerfile
+    ports:
+      - "8080:80"
+    restart: always

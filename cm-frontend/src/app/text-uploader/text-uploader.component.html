@@ -1,0 +1,46 @@
+<div class="container">
+    <div>
+        <h3>Concept Map from Unstructured Text</h3>
+        <p>
+            Create a concept map from any unstructered text (e.g. an scientific abstract).
+        </p>
+        <p>
+            Shorter and more concise texts will usually yield better results. Choosing an appropriate context preset may also help.
+            Depending on the selected model (and its context size), long texts may result in server-side processing errors, preventing their conversion into a concept map. 
+            A method to mitigate such errors is currently under development. However, since there seems to be no direct correlation between the context size and this behavior, it has not yet 
+            been possible to determine a specific length up to which texts can be processed without issues.
+        </p>
+    </div>
+    <hr />
+
+    <div class="row">
+        <div class="col-12">
+            <label class="fs-5" for="text_input">Text:</label>
+            <textarea rows="10" class="form-control mt-2" placeholder="Insert unstructured text here ..."
+                id="text_input" (change)="onChange()" [(ngModel)]="text"></textarea>
+        </div>
+
+        <div class="col-12 text-end">
+            <section [ngSwitch]="status">
+                <p class="m-0 p-0" *ngSwitchCase="'processing'">⏳ Processing...</p>
+                <p class="m-0 p-0" *ngSwitchCase="'success'">✅ Done!</p>
+                <p class="m-0 p-0" *ngSwitchCase="'fail'">❌ Error!</p>
+                <p class="m-0 p-0" *ngSwitchCase="'waiting'">😶 Waiting for submission...</p>
+                <p class="m-0 p-0" *ngSwitchDefault>🔎 Insert text...</p>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <app-options></app-options>
+    </div>
+
+    <div class="row pt-2">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-secondary" type="button" (click)="onClear()"
+                [disabled]="status=='processing'">Clear</button>
+            <button class="btn btn-primary" data-bs-theme="dark" type="button" (click)="onUpload()"
+                [disabled]="status=='processing' || status=='initial'">Create KG</button>
+        </div>
+    </div>
+</div>

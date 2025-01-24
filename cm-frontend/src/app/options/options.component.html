@@ -1,0 +1,75 @@
+<hr>
+
+<div class="fs-5 mt-2">
+  Parameters/Settings:
+</div>
+
+<form #optionsForm="ngForm">
+  <div class="row g-3">
+    <div class="col-10">
+      <label for="filename">Filename</label>
+      <input type="text" class="form-control" placeholder="auto-generated filename" id="filename"
+        [(ngModel)]="options.filename" name="filename">
+    </div>
+    <div class="col-2">
+      <label for="extension">Extension</label>
+      <select class="form-select" id="extension" [(ngModel)]="options.extension" name="extension" required>
+        <option *ngFor="let extension of extensions" [value]="extension">{{ extension }}</option>
+      </select>
+    </div>
+
+    <div class="col-4">
+      <label for="model">Model</label>
+      <select class="form-select" id="model" [(ngModel)]="options.model" name="model" required>
+        <option *ngFor="let model of models" [value]="model">{{ model }}</option>
+      </select>
+    </div>
+    <div class="col-4">
+      <label for="temperature">Creativity</label>
+      <input type="range" class="form-range custom-range" min="0" max="1.0" step="0.05" id="temperature"
+        [(ngModel)]="options.temperature" name="temperature">
+    </div>
+    <div class="col-4">
+      <label for="context">Context Preset</label>
+      <select class="form-select" id="context" [(ngModel)]="options.context" name="context" required>
+        <option *ngFor="let context of contexts" [value]="context">{{ context }}</option>
+      </select>
+    </div>
+
+    <div class="col-6 col-xl-3">
+      <label for="maxNodes">Number of Nodes</label>
+      <input type="number" class="form-control" min="0" max="100" id="maxNodes" name="maxNodes"
+        [(ngModel)]="options.num_nodes">
+    </div>
+    <div class="col-6 col-xl-3">
+      <br>
+      <div class="form-check form-switch">
+        <input class="form-check-input me-1" type="checkbox" role="switch" [(ngModel)]="options.show_node_props"
+          id="nodeProperties" name="nodeProperties">
+        <label class="form-check-label" for="nodeProperties">
+          Provide node properties
+        </label>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <br>
+      <div class="form-check form-switch">
+        <input class="form-check-input me-1" role="switch" type="checkbox" [(ngModel)]="options.show_edge_props"
+          id="edgeProperties" name="edgeProperties">
+        <label class="form-check-label" for="edgeProperties">
+          Provide edge properties
+        </label>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <br>
+      <div class="form-check form-switch">
+        <input class="form-check-input me-1" role="switch" type="checkbox" [(ngModel)]="options.show_labels"
+          id="showLabels" name="showLabels">
+        <label class="form-check-label" for="showLabels">
+          Show node labels
+        </label>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,14 @@
+cm-backend/build_cm_from_txt.py
+cm-backend/Dockerfile
+cm-backend/.env.template
+
+cm-frontend/Dockerfile
+cm-frontend/dist
+cm-frontend/.gitignore
+cm-frontend/.git
+cm-frontend/.editorconfig
+cm-frontend/.vscode/*
+cm-frontend/node_modules
+cm-frontend/e2e
+cm-frontend/docs
+kg-construction-frontend-app/*.zip

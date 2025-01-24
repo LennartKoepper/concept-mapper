@@ -1,0 +1,9 @@
+input[type=file]::file-selector-button {
+    color: white;
+    background-color: #e0251b;
+}
+
+input[type=file]::file-selector-button:hover {
+    color: black !important;
+    border: 2px solid black;
+}

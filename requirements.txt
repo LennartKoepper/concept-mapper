@@ -1,0 +1,13 @@
+python-dotenv
+fastapi[standard]
+graphviz
+pypdf
+langchain
+langchain-openai
+langchain-mistralai
+langchain-community
+tiktoken
+mistral-common
+networkx
+pydantic
+beautifulsoup4

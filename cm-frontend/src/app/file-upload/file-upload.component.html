@@ -1,0 +1,73 @@
+<div class="container">
+    <div>
+        <h3>Concept Map from File</h3>
+        <p>
+            Create a concept map from an .pdf, .txt, .md or .tex file (e.g. a scientific paper). 
+        </p>
+        <p>
+            The documents do not need to follow a specific structure. Shorter documents will usually yield better results. Choosing an appropriate context preset may also help.
+            Depending on the selected model (and its context size), long documents may result in server-side processing errors, preventing their conversion into a concept map. 
+            A method to mitigate such errors is currently under development. However, since there seems to be no direct correlation between the context size and this behavior, it has not yet 
+            been possible to determine a specific length up to which documents can be processed without issues.
+        </p>
+    </div>
+    <hr />
+
+    <div class="row">
+        <div>
+            <label class="fs-5" for="text_input">File Upload:</label>
+            <input #fileInput type="file" class="form-control mt-2" placeholder="Select File" (change)="onChange($event)"
+                accept=".pdf,.txt">
+        </div>
+    </div>
+
+    <div class="card mt-2 p-1">
+        <div class="row">
+            <div class="col">
+                <div *ngIf="file else no_file">
+                    <section class="file-info">
+                        Details:
+                        <ul>
+                            <li>Type: <i>{{file.type}}</i></li>
+                            <li>Size: <i>{{file.size}} bytes</i></li>
+                        </ul>
+                    </section>
+                </div>
+
+                <ng-template #no_file>
+                    <section class="file-info-placeholder">
+                        Details:
+                        <ul>
+                            <li class="placeholder-glow"><span class="placeholder col-6"></span></li>
+                            <li class="placeholder-glow"><span class="placeholder col-6"></span></li>
+                        </ul>
+                    </section>
+                </ng-template>
+            </div>
+
+            <div class="col text-end">
+                <section [ngSwitch]="status">
+                    <p *ngSwitchCase="'processing'">⏳ Processing...</p>
+                    <p *ngSwitchCase="'success'">✅ Done!</p>
+                    <p *ngSwitchCase="'fail'">❌ Error!</p>
+                    <p *ngSwitchCase="'waiting'">😶 Waiting for submission...</p>
+                    <p *ngSwitchDefault>🔎 Select a file...</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <app-options></app-options>
+    </div>
+
+
+    <div class="row pt-2">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-secondary" type="button" (click)="onClear()"
+                [disabled]="status=='processing'">Clear</button>
+            <button class="btn btn-primary" data-bs-theme="dark" type="button" (click)="onUpload()"
+                [disabled]="status=='processing' || status=='initial'">Create KG</button>
+        </div>
+    </div>
+</div>
