@@ -11,5 +11,5 @@ COPY ./requirements.txt /app/requirements.txt
 RUN pip install -r /app/requirements.txt
 
 # copy & execute sourcecode
-COPY ./src /app/src
+COPY ./cm-backend /app/src
 CMD ["fastapi", "run", "concept_mapper_api.py", "--port", "8000"]

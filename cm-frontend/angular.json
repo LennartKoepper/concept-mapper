@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kg-construction-frontend-app": {
+    "cm-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/kg-construction-frontend-app",
+            "outputPath": "dist/cm-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -72,15 +72,15 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "kg-construction-frontend-app:build:production"
+              "buildTarget": "cm-frontend:build:production"
             },
             "development": {
-              "buildTarget": "kg-construction-frontend-app:build:development"
+              "buildTarget": "cm-frontend:build:development"
             }
           },
           "defaultConfiguration": "development",
           "options": {
-            "buildTarget": "kg-construction-frontend-app:build",
+            "buildTarget": "cm-frontend:build",
             "proxyConfig": "src/proxy.conf.json"
           }
         },
