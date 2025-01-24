@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   fastapi-backend:
-    container_name: concept-mapper-cm-backend
+    container_name: concept-mapper-backend
     env_file:
       - cm-backend/.env
     build:
