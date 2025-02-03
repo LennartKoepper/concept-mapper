@@ -3,6 +3,8 @@
 ## Overview
 concept-mapper is a web application designed to generate concept maps from various text sources using Large Language Models (LLMs). It enables users to extract structured knowledge from unstructured text and visualize it as a concept map. 
 
+![UI of concept-mapper](image.png)
+
 ## Features
 - **Flexible Input Options**: Accepts raw text, uploaded documents (PDF, TXT, MD, TEX), and web URLs.
 - **Configuration Options**: Users can configure the concept map generation process, see next Section.
