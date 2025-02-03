@@ -35,6 +35,7 @@ concept-mapper follows a multi-step approach to generate concept maps from unstr
 4. **Visualization**: The structured data is processed and visualized using Graphviz to create the final concept map.
 5. **Evaluation**: Computation of graph-based metrics, that allow a quantitative evaluation of the generated concept map.
 
+Credits: Approach and utilized prompts heavily inspired by [NaLLM](https://github.com/neo4j/NaLLM) and [llmapper](https://github.com/jorgearango/llmapper).
 
 ## Installation
 ### Clone the Repository
