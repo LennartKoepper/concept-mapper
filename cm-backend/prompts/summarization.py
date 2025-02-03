@@ -22,6 +22,8 @@ class SummaryTest(BaseModel):
 def get_summary_test_prompt() -> Tuple[ChatPromptTemplate, BaseOutputParser]:
     parser = JsonOutputParser(pydantic_object=SummaryTest)
 
+
+    # Prompt by jorgearango, see https://github.com/jorgearango/llmapper.
     prompt = ChatPromptTemplate(
         [
             (
@@ -115,10 +117,7 @@ class Summary(BaseModel):
 def get_default_summary_prompt() -> Tuple[ChatPromptTemplate, BaseOutputParser]:
     parser = JsonOutputParser(pydantic_object=Summary)
 
-    # Include no fewer than {nr_concepts} relationships in this list.
-    # ONLY INCLUDE ONE CONCEPT PER LIST ELEMENT. The first concept in the list is the main subject of the {text_type}.
-    # Further include as many relations as necessary to represent ALL the concepts in the concepts set.
-
+    # Prompt inspired by jorgearangos llmapper-project, see https://github.com/jorgearango/llmapper.
     prompt = ChatPromptTemplate(
         [
             (

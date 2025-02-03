@@ -27,6 +27,7 @@ class ConceptMap(BaseModel):
 def get_default_prompt() -> Tuple[ChatPromptTemplate, BaseOutputParser]:
     parser = JsonOutputParser(pydantic_object=ConceptMap)
 
+    # Prompt inspired by neo4js NaLLM-project, see https://github.com/neo4j/NaLLM.
     prompt = ChatPromptTemplate(
         [
             (
