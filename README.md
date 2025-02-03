@@ -4,10 +4,10 @@
 concept-mapper is a web application designed to generate concept maps from various text sources using Large Language Models (LLMs). It enables users to extract structured knowledge from unstructured text and visualize it as a concept map. 
 
 ## Features
-- **Flexible Input Options**: Accepts raw text, uploaded documents (PDF, TXT, MD, TEX), and web URLs for processing.
-- **Configuaration Options**: Users can configure the concept map generation process, see next Section.
+- **Flexible Input Options**: Accepts raw text, uploaded documents (PDF, TXT, MD, TEX), and web URLs.
+- **Configuration Options**: Users can configure the concept map generation process, see next Section.
 - **Concept Map Generation**: Uses OpenAI and Mistral LLM APIs to extract concepts and relationships.
-- **Graph Visualization**: Outputs concept maps in multiple formats (PDF, PNG, SVG, etc.) using [Graphviz](https://graphviz.org/).
+- **Graph Visualization**: Renders concept maps in multiple formats (PDF, PNG, SVG, etc.) using [Graphviz](https://graphviz.org/).
 - **Evaluation Metrics**: Includes the calculation of various graph-based metrics to assess the generated concept maps.
 - **Docker Support**: Provides containerized deployment for ease of use.
 
@@ -34,7 +34,6 @@ concept-mapper follows a multi-step approach to generate concept maps from unstr
 5. **Evaluation**: Computation of graph-based metrics, that allow a quantitative evaluation of the generated concept map.
 
 
-
 ## Installation
 ### Clone the Repository
 ```bash
@@ -42,7 +41,7 @@ concept-mapper follows a multi-step approach to generate concept maps from unstr
  cd concept-mapper
 ```
 
-### Set Environment Variables
+### Setup Environment Variables
 1. In `/cm-backend` rename `.env.template` to `.env`.
 2. Replace `YOUR_VALUE` in the line `OPENAI_API_KEY=YOUR_VALUE` with your OpenAI-API-Key.
 3. Replace `YOUR_VALUE` in the line `MISTRAL_API_KEY=YOUR_VALUE` with your Mistral-API-Key.
@@ -51,7 +50,8 @@ concept-mapper follows a multi-step approach to generate concept maps from unstr
 ### A) Containerized Deployment via Docker
 **Prerequisites:**
 * [Docker](https://www.docker.com/) (or Docker-Desktop) is installed on your system
-* Docker-Daemon is running
+* Docker-Daemon is running 
+* Before running the application, ensure that you provide a `.env` file with necessary API keys and configurations.
 
 1. Navigate into the root-directory of the repository.
 2. Execute command `docker-compose up`.
@@ -63,7 +63,7 @@ After the build completed and both Docker-Containers (Frontend and Backend) star
 - [Python 3.10+](https://www.python.org/downloads/)
 - [Node.js](https://nodejs.org/en/download/) 
 - [Angular V18](https://v18.angular.dev/installation)
-- **Before running the application, ensure that you provide a `.env` file with necessary API keys and configurations.**
+- Before running the application, ensure that you provide a `.env` file with necessary API keys and configurations.
 
 #### Backend Setup
 1. Navigate into the root-directory of the repository and create a virtual environment providing the required dependencies:
@@ -78,23 +78,25 @@ fastapi dev concept_mapper_api.py
 ```
 
 #### Frontend Setup
-1. Navigate to the frontend directory:
-```bash
-cd cm-frontend
-```
-2. Install dependencies:
+1. Navigate to the frontend directory and install dependencies
 ```bash
 npm install
 ```
-3. Start the Angular development server:
+
+2. Start the Angular development server:
 ```bash
 ng serve --open
 ```
 
 ## Future Enhancements
-concept-mapper is currently just a proof of concept, with much room for improvement and/or alternative approaches. Some approaches 
+concept-mapper is currently just a proof of concept, with much room for improvement and/or alternative approaches. Some of my ideas include: 
 - Fine-tuning LLMs for improved concept extraction.
+- Cleansing of extracted text (espacially from html and pdf).
 - Chunking for handling long input texts.
+- Extended approach for Knowledge-Graph generation (& import to graph database). 
+- Add more context presets and more specific prompts.
+- Add support for new reasoning models.
+- ...
 
 ## Contact
 Developed by **Lennart Köpper** as part of a  project at Coburg University of Applied Sciences.
