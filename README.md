@@ -103,5 +103,5 @@ concept-mapper is currently just a proof of concept, with much room for improvem
 
 ## Contact
 Developed by **Lennart Köpper** as part of a  project at Coburg University of Applied Sciences.
-For inquiries, contact: [Lennart.Koepperl@stud.hs-coburg.de]
+For inquiries, contact: [Lennart.Koepper@stud.hs-coburg.de]
 
