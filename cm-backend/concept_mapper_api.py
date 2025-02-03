@@ -1,14 +1,14 @@
 #! /usr/bin/env python
-"""Main-Script for hosting a FastAPI application providing the cm-backend-api for the Concept-Mapper-Application. Start
+"""Main-Script for hosting a FastAPI application providing the backend-api for the Concept-Mapper-Application. Start
 with command `fastapi dev concept_mapper_api.py`.
 """
 import json
 import os
 
-import httpx
 from dotenv import load_dotenv
 from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from fastapi.responses import FileResponse
+from openai import RateLimitError, APIStatusError
 from pydantic import BaseModel
 from pypdf import PdfReader
 
@@ -101,7 +101,7 @@ def create_concept_map(text: str, options) -> FileResponse:
     extension =   options.extension   if check_extension(options.extension) else ".pdf"
     context =     options.context     if check_context(options.context)     else "default"
     model =       options.model       if check_model(options.model)         else "gpt-4o"
-    temperature = max(0.0, min(1.0, options.temperature))
+    temperature = max(0.0, min(0.8, options.temperature))
     num_nodes =   max(2, min(32, options.num_nodes))
     show_node_props = options.show_node_props
     show_edge_props = options.show_edge_props
@@ -182,9 +182,15 @@ def create_concept_map(text: str, options) -> FileResponse:
                 "input": json_summary,
             })
 
-    except httpx.HTTPStatusError as err:
-        if err.response.status_code == 401:
-            raise HTTPException(status_code=401, detail=f"Unauthorized: Provided API key invalid for model {model}!")
+    except RateLimitError as err:
+        raise HTTPException(status_code=422, detail="Rate-Limit-Error: " + err.response.json()["error"]["message"])
+
+    except APIStatusError as err:
+        raise HTTPException(status_code=err.status_code, detail=err.response.json()["error"]["message"])
+
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=str(err))
+
 
     # save scheme (extended by options)
     json_scheme["options"] = vars(options)

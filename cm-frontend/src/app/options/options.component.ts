@@ -17,7 +17,7 @@ export class OptionsComponent {
     model: "gpt-4o",
     temperature: 0.1,
     context: "default",
-    num_nodes: 16,
+    num_nodes: 12,
     show_node_props: false,
     show_edge_props: false,
     show_labels: true

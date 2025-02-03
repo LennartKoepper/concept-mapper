@@ -73,8 +73,16 @@ export class ApiService {
     return options && options.filename ? options.filename : filename;
   }
 
-  handleError(error: HttpErrorResponse) {
-    alert("An Error occured: \n Status " + error.status + "\nMessage" + error.message)
-    return throwError(error)
+  handleError(err: HttpErrorResponse) {
+    let errorMessage = "An error occurred:\n";
+
+    if (err.error && err.error.detail) {
+        errorMessage += err.error.detail
+    } else {
+        errorMessage += `Status: ${err.status}\nMessage: ${err.message}`;
+    }
+
+    alert(errorMessage);
+    return throwError(() => err);
   }
 }

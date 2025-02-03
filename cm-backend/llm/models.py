@@ -31,15 +31,20 @@ class BaseLLM(ABC):
         return message
 
     @abstractmethod
-    async def num_tokens_from_string(self, string: str) -> str:
+    def num_tokens_from_string(self, string: str) -> str:
         """Given a string returns the number of tokens the given string consists of"""
 
     @abstractmethod
-    async def max_allowed_token_length(self) -> int:
-        """Returns the maximum number of tokens the LLM can handle"""
+    def context_length(self) -> int:
+        """Returns the maximum number of tokens the LLMs context can handle"""
+
+    @abstractmethod
+    def rate_limit(self) -> int:
+        """Returns the api rate limit for the specified LLM in tokens per minute"""
 
 
 class OpenAiLLM(BaseLLM):
+
     def __init__(self, openai_api_key: str, model_name: str = "gpt-4o", temp: float = 0.7) -> None:
         llm = ChatOpenAI(
             model=model_name,
@@ -56,19 +61,33 @@ class OpenAiLLM(BaseLLM):
         num_tokens = len(encoding.encode(string))
         return num_tokens
 
-    def max_allowed_token_length(self) -> int:
-        token_limits = {
-            "gpt-4o": 30_000,
+    def context_length(self) -> int:
+        context_lengths = {
+            "gpt-4o": 128_000,
             "gpt-4o-mini": 128_000,
-            "gpt-4-turbo": 30_000,
+            "gpt-4-turbo": 128_000,
             "gpt-4": 8_192,
             "gpt-3.5-turbo": 16_385
         }
 
-        if self.model_name in token_limits:
-            return token_limits[self.model_name]
+        if self.model_name in context_lengths:
+            return context_lengths[self.model_name]
         else:
-            return 30_000
+            return 128_000
+
+    def rate_limit(self) -> int:
+        rate_limits = {
+            "gpt-4o": 30_000,
+            "gpt-4o-mini": 200_000,
+            "gpt-4-turbo": 30_000,
+            "gpt-4": 10_000,
+            "gpt-3.5-turbo": 200_000
+        }
+
+        if self.model_name in rate_limits:
+            return rate_limits[self.model_name]
+        else:
+            return 200_000
 
 
 class MistralAiLLM(BaseLLM):
@@ -96,5 +115,26 @@ class MistralAiLLM(BaseLLM):
 
         return len(tokens)
 
-    def max_allowed_token_length(self) -> int:
-        return 32_768
+    def context_length(self) -> int:
+        context_lengths = {
+            "mistral-large-latest": 131_072,
+            "mistral-small-latest": 32_768,
+            "open-mistral-7b": 32_768
+        }
+
+        if self.model_name in context_lengths:
+            return context_lengths[self.model_name]
+        else:
+            return 131_072
+
+    def rate_limit(self) -> int:
+        rate_limits = {
+            "mistral-large-latest": 2_000_000,
+            "mistral-small-latest": 2_000_000,
+            "open-mistral-7b": 2_000_000
+        }
+
+        if self.model_name in rate_limits:
+            return rate_limits[self.model_name]
+        else:
+            return 2_000_000

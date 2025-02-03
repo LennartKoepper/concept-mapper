@@ -9,5 +9,6 @@ langchain-community
 tiktoken
 mistral-common
 networkx
+openai
 pydantic
 beautifulsoup4
